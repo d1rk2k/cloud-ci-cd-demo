@@ -36,7 +36,16 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
-
+      - name: Verify API_KEY is available
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          if [ -z "$API_KEY" ]; then
+            echo "API_KEY is missing"
+            exit 1
+          fi
+          echo "API_KEY is configured"
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
