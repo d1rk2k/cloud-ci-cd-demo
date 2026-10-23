@@ -12,5 +12,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Display success message
-        run: echo "Build successful!"
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build website
+        run: npm run build
